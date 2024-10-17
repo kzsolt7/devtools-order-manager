@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf Layout Example</title>
+</head>
+<body>
+
+<!-- Header fragment inclusion -->
+<div th:replace="~{fragments/header :: header}"></div>
+
+<!-- Main content -->
+<div>
+    <div id="content" th:replace="~{${pageContent} :: content}"></div>
+</div>
+
+<!-- Footer fragment inclusion -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>
