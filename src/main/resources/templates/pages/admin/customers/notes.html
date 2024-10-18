@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Jegyzet Hozzáadása</title>
+</head>
+<body>
+<section th:fragment="content">
+  <div class="container mt-4">
+    <h2>Jegyzet Hozzáadása: <span th:text="${customer.companyName}"></span></h2>
+    <form action="#" th:action="@{/customers/notes/{id}(id=${customer.id})}" th:object="${note}" method="post">
+      <div class="mb-3">
+        <label for="content" class="form-label">Jegyzet</label>
+        <textarea class="form-control" id="content" th:field="*{content}" rows="3" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Jegyzet Mentése</button>
+    </form>
+
+    <h3>Meglévő Jegyzetek</h3>
+    <ul>
+      <li th:each="note : ${customer.notes}">
+        <span th:text="${#temporals.format(note.createdAt, 'yyyy-MM-dd HH:mm')}"></span>:
+        <span th:text="${note.content}"></span>
+      </li>
+
+    </ul>
+  </div>
+</section>
+</body>
+</html>

@@ -2,13 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Ügyfelek Listája</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <section th:fragment="content">
     <div class="container mt-4">
         <div class="d-flex justify-content-between">
             <h2>Ügyfelek</h2>
-            <a href="/customers/create" class="btn btn-success">+ Új Ügyfél</a>
+            <a href="/customers/create" class="btn btn-success">Új Ügyfél</a>
         </div>
         <table class="table table-striped mt-3">
             <thead>
@@ -18,6 +19,7 @@
                 <th>Cím</th>
                 <th>Tevékenység</th>
                 <th>Adószám</th>
+                <th>Műveletek</th> <!-- Új oszlop a műveletekhez -->
             </tr>
             </thead>
             <tbody>
@@ -27,6 +29,11 @@
                 <td th:text="${customer.address}"></td>
                 <td th:text="${customer.activity}"></td>
                 <td th:text="${customer.taxNumber}"></td>
+                <td>
+                    <!-- Módosítás és Jegyzet hozzáadása gombok -->
+                    <a th:href="@{/customers/edit/{id}(id=${customer.id})}" class="btn btn-warning btn-sm">Módosít</a>
+                    <a th:href="@{/customers/notes/{id}(id=${customer.id})}" class="btn btn-info btn-sm">Jegyzet hozzáadása</a>
+                </td>
             </tr>
             </tbody>
         </table>
