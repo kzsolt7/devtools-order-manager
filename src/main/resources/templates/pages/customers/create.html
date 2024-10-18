@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Új Ügyfél Létrehozása</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<section th:fragment="content">
+  <div class="container mt-4">
+    <h2>Új Ügyfél Létrehozása</h2>
+    <form action="#" th:action="@{/customers/create}" th:object="${customer}" method="post" class="mt-4">
+      <div class="mb-3">
+        <label for="companyName" class="form-label">Cég Név</label>
+        <input type="text" class="form-control" id="companyName" th:field="*{companyName}" required>
+      </div>
+      <div class="mb-3">
+        <label for="address" class="form-label">Cím</label>
+        <input type="text" class="form-control" id="address" th:field="*{address}">
+      </div>
+      <div class="mb-3">
+        <label for="activity" class="form-label">Tevékenység</label>
+        <input type="text" class="form-control" id="activity" th:field="*{activity}">
+      </div>
+      <div class="mb-3">
+        <label for="taxNumber" class="form-label">Adószám</label>
+        <input type="text" class="form-control" id="taxNumber" th:field="*{taxNumber}">
+      </div>
+
+      <!-- Kapcsolattartók dinamikus hozzáadása -->
+      <div class="mb-3">
+        <label for="contacts" class="form-label">Kapcsolattartók</label>
+        <div id="contact-container">
+          <div class="row mb-2 contact-form" th:each="contact, iterStat : *{contacts}">
+            <div class="col-md-5">
+              <input type="text" class="form-control" placeholder="Kapcsolattartó Név" th:field="*{contacts[__${iterStat.index}__].name}" required>
+            </div>
+            <div class="col-md-5">
+              <input type="email" class="form-control" placeholder="Kapcsolattartó Email" th:field="*{contacts[__${iterStat.index}__].email}" required>
+            </div>
+            <div class="col-md-2">
+              <button type="button" class="btn btn-danger remove-contact">Törlés</button>
+            </div>
+          </div>
+        </div>
+        <button type="button" id="add-contact" class="btn btn-secondary">+ Kapcsolattartó Hozzáadása</button>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Létrehozás</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('add-contact').addEventListener('click', function() {
+      let container = document.getElementById('contact-container');
+      let index = container.children.length;
+      let template = `
+        <div class="row mb-2 contact-form">
+          <div class="col-md-5">
+            <input type="text" name="contacts[${index}].name" class="form-control" placeholder="Kapcsolattartó Név" required>
+          </div>
+          <div class="col-md-5">
+            <input type="email" name="contacts[${index}].email" class="form-control" placeholder="Kapcsolattartó Email" required>
+          </div>
+          <div class="col-md-2">
+            <button type="button" class="btn btn-danger remove-contact">Törlés</button>
+          </div>
+        </div>
+      `;
+      container.insertAdjacentHTML('beforeend', template);
+      attachRemoveEvent();
+    });
+
+    function attachRemoveEvent() {
+      let removeButtons = document.querySelectorAll('.remove-contact');
+      removeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          button.closest('.contact-form').remove();
+        });
+      });
+    }
+
+    // Call this once on page load to ensure delete buttons work
+    attachRemoveEvent();
+  </script>
+</section>
+</body>
+</html>

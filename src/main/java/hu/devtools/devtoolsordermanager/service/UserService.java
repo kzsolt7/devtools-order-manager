@@ -47,7 +47,7 @@ public class UserService {
                 roleRepository.save(userRole);
             }
 
-            admin.setRoles(Set.of(userRole));
+            admin.setRoles(Set.of(adminRole));
             userRepository.save(admin);
         }
     }
