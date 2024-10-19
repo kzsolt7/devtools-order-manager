@@ -7,6 +7,7 @@
 <section th:fragment="content">
   <div class="container mt-4">
     <h2>Jegyzet Hozzáadása: <span th:text="${customer.companyName}"></span></h2>
+    <div th:replace="~{fragments/backButton :: backButton}"></div>
     <form action="#" th:action="@{/customers/notes/{id}(id=${customer.id})}" th:object="${note}" method="post">
       <div class="mb-3">
         <label for="content" class="form-label">Jegyzet</label>

@@ -8,6 +8,7 @@
 <section th:fragment="content">
   <div class="container mt-4">
     <h2>Ügyfél Módosítása</h2>
+    <div th:replace="~{fragments/backButton :: backButton}"></div>
     <form action="#" th:action="@{/customers/edit/{id}(id=${customer.id})}" th:object="${customer}" method="post" class="mt-4">
       <div class="mb-3">
         <label for="companyName" class="form-label">Cég Név</label>

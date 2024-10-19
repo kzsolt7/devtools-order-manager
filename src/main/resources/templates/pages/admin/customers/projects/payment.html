@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kifizetés Hozzáadása</title>
+</head>
+<body>
+<section th:fragment="content">
+    <div class="container mt-4">
+        <h2>Kifizetés Hozzáadása: <span th:text="${project.name}"></span></h2>
+        <div th:replace="~{fragments/backButton :: backButton}"></div>
+        <form th:action="@{/customers/{customerId}/projects/payment/add/{projectId}(customerId=${customerId}, projectId=${project.id})}" method="post">
+            <div class="mb-3">
+                <label for="amount" class="form-label">Összeg</label>
+                <input type="number" class="form-control" id="amount" name="amount" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Leírás</label>
+                <input type="text" class="form-control" id="description" name="description">
+            </div>
+            <div class="mb-3">
+                <label for="invoiceNumber" class="form-label">Számla Sorszám</label>
+                <input type="text" class="form-control" id="invoiceNumber" name="invoiceNumber">
+            </div>
+            <button type="submit" class="btn btn-primary">Mentés</button>
+        </form>
+        <h3 class="mt-4">Eddigi Kifizetések</h3>
+        <table class="table table-striped mt-3">
+            <thead>
+            <tr>
+                <th>Összeg</th>
+                <th>Dátum</th>
+                <th>Leírás</th>
+                <th>Számla Sorszám</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="payment : ${payments}">
+                <td th:text="${payment.amount}"></td>
+                <td th:text="${payment.paymentDate}"></td>
+                <td th:text="${payment.description}"></td>
+                <td th:text="${payment.invoiceNumber}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+</body>
+</html>

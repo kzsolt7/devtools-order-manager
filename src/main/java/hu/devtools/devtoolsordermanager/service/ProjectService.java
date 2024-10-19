@@ -6,6 +6,7 @@ import hu.devtools.devtoolsordermanager.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -40,5 +41,15 @@ public class ProjectService {
         existingProject.setPrice(projectDetails.getPrice());
         existingProject.setAmountPaid(projectDetails.getAmountPaid());
         projectRepository.save(existingProject);
+    }
+
+    public void updateProjectPayment(Long projectId, BigDecimal amountPaid) {
+        Project project = getProjectById(projectId);
+        project.setAmountPaid(amountPaid);
+        projectRepository.save(project);
+    }
+
+    public void saveProject(Project project) {
+        projectRepository.save(project);
     }
 }

@@ -6,8 +6,9 @@
 <body>
 <section th:fragment="content">
   <div class="container mt-4">
-    <h2>Projektek</h2>
-    <a th:href="@{/customers/{customerId}/projects/create(customerId=${customerId})}" class="btn btn-success">Új Projekt</a>
+    <h2>Projektek: <span th:text="${customer.companyName}"></span></h2>
+    <div th:replace="~{fragments/backButton :: backButton}"></div>
+    <a th:href="@{/customers/{customerId}/projects/create(customerId=${customer.id})}" class="btn btn-success">Új Projekt</a>
     <table class="table table-striped mt-3">
       <thead>
       <tr>
@@ -15,6 +16,8 @@
         <th>Leírás</th>
         <th>Ár</th>
         <th>Eddig Fizetve</th>
+        <th>Fennmaradt Kifizetés</th>
+        <th>Műveletek</th>
       </tr>
       </thead>
       <tbody>
@@ -22,7 +25,12 @@
         <td th:text="${project.name}"></td>
         <td th:text="${project.description}"></td>
         <td th:text="${project.price}"></td>
-        <td th:text="${project.amountPaid}"></td>
+        <td th:text="${project.totalAmountPaid}"></td>
+        <td th:text="${project.remainingPayment}"></td>
+        <td>
+          <a th:href="@{/customers/{customerId}/projects/edit/{projectId}(customerId=${customer.id}, projectId=${project.id})}" class="btn btn-warning btn-sm">Módosít</a>
+          <a th:href="@{/customers/{customerId}/projects/payment/{projectId}(customerId=${customer.id}, projectId=${project.id})}" class="btn btn-info btn-sm">Kifizetés hozzáadása</a>
+        </td>
       </tr>
       </tbody>
     </table>

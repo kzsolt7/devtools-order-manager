@@ -7,6 +7,7 @@
 <section th:fragment="content">
   <div class="container mt-4">
     <h2>Új Projekt Létrehozása</h2>
+    <div th:replace="~{fragments/backButton :: backButton}"></div>
     <form th:action="@{/customers/{customerId}/projects/create(customerId=${customerId})}" th:object="${project}" method="post">
       <div class="mb-3">
         <label for="name" class="form-label">Projekt Név</label>
@@ -19,10 +20,6 @@
       <div class="mb-3">
         <label for="price" class="form-label">Ár</label>
         <input type="number" class="form-control" th:field="*{price}" required>
-      </div>
-      <div class="mb-3">
-        <label for="amountPaid" class="form-label">Eddig Fizetve</label>
-        <input type="number" class="form-control" th:field="*{amountPaid}">
       </div>
       <button type="submit" class="btn btn-primary">Létrehozás</button>
     </form>
