@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Projektek Listája</title>
+</head>
+<body>
+<section th:fragment="content">
+  <div class="container mt-4">
+    <h2>Projektek</h2>
+    <a th:href="@{/customers/{customerId}/projects/create(customerId=${customerId})}" class="btn btn-success">Új Projekt</a>
+    <table class="table table-striped mt-3">
+      <thead>
+      <tr>
+        <th>Név</th>
+        <th>Leírás</th>
+        <th>Ár</th>
+        <th>Eddig Fizetve</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="project : ${projects}">
+        <td th:text="${project.name}"></td>
+        <td th:text="${project.description}"></td>
+        <td th:text="${project.price}"></td>
+        <td th:text="${project.amountPaid}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+</body>
+</html>

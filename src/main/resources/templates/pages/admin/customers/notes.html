@@ -16,13 +16,16 @@
     </form>
 
     <h3>Meglévő Jegyzetek</h3>
-    <ul>
-      <li th:each="note : ${customer.notes}">
-        <span th:text="${#temporals.format(note.createdAt, 'yyyy-MM-dd HH:mm')}"></span>:
-        <span th:text="${note.content}"></span>
-      </li>
-
-    </ul>
+    <div class="row">
+      <div class="col-md-4" th:each="note : ${customer.notes}">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title" th:text="${#temporals.format(note.createdAt, 'yyyy-MM-dd HH:mm')}"></h5>
+            <p class="card-text" th:text="${note.content}"></p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 </body>

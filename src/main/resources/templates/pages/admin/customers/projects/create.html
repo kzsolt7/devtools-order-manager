@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Új Projekt Létrehozása</title>
+</head>
+<body>
+<section th:fragment="content">
+  <div class="container mt-4">
+    <h2>Új Projekt Létrehozása</h2>
+    <form th:action="@{/customers/{customerId}/projects/create(customerId=${customerId})}" th:object="${project}" method="post">
+      <div class="mb-3">
+        <label for="name" class="form-label">Projekt Név</label>
+        <input type="text" class="form-control" th:field="*{name}" required>
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Leírás</label>
+        <textarea class="form-control" th:field="*{description}" rows="3" required></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Ár</label>
+        <input type="number" class="form-control" th:field="*{price}" required>
+      </div>
+      <div class="mb-3">
+        <label for="amountPaid" class="form-label">Eddig Fizetve</label>
+        <input type="number" class="form-control" th:field="*{amountPaid}">
+      </div>
+      <button type="submit" class="btn btn-primary">Létrehozás</button>
+    </form>
+  </div>
+</section>
+</body>
+</html>
